@@ -1,4 +1,27 @@
-import { parsePhoneNumberWithError } from 'libphonenumber-js';
+import { parsePhoneNumberWithError } from 'libphonenumber-js/mobile';
+import type { E164Number } from 'libphonenumber-js/mobile';
+
+export { ParseError } from 'libphonenumber-js/mobile';
+
+function validateE164Number(value: string): asserts value is E164Number {
+  if (value && !value.startsWith('+')) {
+    throw new TypeError(`Invalid E164Number: ${value}`);
+  }
+}
+
+const parseE164Number = (value: string): E164Number | '' => {
+  // If typeof `value` is string and `!value` is true, then `value` is an empty string.
+  if (!value) {
+    return '';
+  }
+
+  const result = value.startsWith('+') ? value : `+${value}`;
+  validateE164Number(result);
+  return result;
+};
+
+export const parseE164PhoneNumberWithError = (value: string) =>
+  parsePhoneNumberWithError(parseE164Number(value));
 
 /**
  * Parse phone number to number string.
@@ -6,7 +29,7 @@ import { parsePhoneNumberWithError } from 'libphonenumber-js';
  */
 export const parsePhoneNumber = (phone: string) => {
   try {
-    return parsePhoneNumberWithError(phone).number.slice(1);
+    return parseE164PhoneNumberWithError(phone).number.slice(1);
   } catch {
     console.error(`Invalid phone number: ${phone}`);
     return phone;
@@ -19,8 +42,7 @@ export const parsePhoneNumber = (phone: string) => {
  */
 export const formatToInternationalPhoneNumber = (phone: string) => {
   try {
-    const phoneNumber = phone.startsWith('+') ? phone : `+${phone}`;
-    return parsePhoneNumberWithError(phoneNumber).formatInternational();
+    return parseE164PhoneNumberWithError(phone).formatInternational();
   } catch {
     console.error(`Invalid phone number: ${phone}`);
     return phone;

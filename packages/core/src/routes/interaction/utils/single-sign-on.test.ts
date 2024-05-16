@@ -77,7 +77,6 @@ describe('Single sign on util methods tests', () => {
         insert: insertUserSsoIdentityMock,
       },
       users: {
-        updateUserById: updateUserMock,
         findUserByEmail: findUserByEmailMock,
       },
     },
@@ -86,6 +85,7 @@ describe('Single sign on util methods tests', () => {
       users: {
         insertUser: insertUserMock,
         generateUserId: generateUserIdMock,
+        updateUserById: updateUserMock,
       },
       ssoConnectors: {
         getAvailableSsoConnectors: getAvailableSsoConnectorsMock,
