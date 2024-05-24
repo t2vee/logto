@@ -10,9 +10,13 @@ function validateE164Number(value: string): asserts value is E164Number {
 }
 
 const parseE164Number = (value: string): E164Number | '' => {
-  // If typeof `value` is string and `!value` is true, then `value` is an empty string.
   if (!value) {
-    return '';
+    /**
+     * The type inference engine can not properly infer the type of the empty string,
+     * but using `string` instead. So we need to cast it.
+     */
+    // eslint-disable-next-line no-restricted-syntax
+    return value as '';
   }
 
   const result = value.startsWith('+') ? value : `+${value}`;
