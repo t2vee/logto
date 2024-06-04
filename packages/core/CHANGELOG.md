@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.17.1
+
+### Patch Changes
+
+- 7a279be1f: add user detail data payload to the `User.Deleted` webhook event
+- Updated dependencies [eacec10ac]
+  - @logto/console@1.16.0
+  - @logto/schemas@1.17.1
+  - @logto/cli@1.17.1
+
 ## 1.17.0
 
 ### Minor Changes
