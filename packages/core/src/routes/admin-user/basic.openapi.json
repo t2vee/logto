@@ -29,6 +29,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "User not found."
           }
         },
         "summary": "Get user",
@@ -51,6 +54,9 @@
                   },
                   "customData": {
                     "description": "Custom data object to update for the given user ID. Note this will replace the entire custom data object.\n\nIf you want to perform a partial update, use the `PATCH /api/users/{userId}/custom-data` endpoint instead."
+                  },
+                  "profile": {
+                    "description": "Profile data object to update for the given user ID. \n\nYou can update profile data individually from the `PATCH /api/users/{userId}/custom-data` endpoint instead."
                   }
                 }
               }
@@ -60,6 +66,12 @@
         "responses": {
           "200": {
             "description": "Updated user data for the given ID."
+          },
+          "404": {
+            "description": "User not found."
+          },
+          "422": {
+            "description": "Provided User Data Object is malformed."
           }
         },
         "summary": "Update user",
@@ -69,6 +81,12 @@
         "responses": {
           "204": {
             "description": "User deleted successfully."
+          },
+          "400": {
+            "description": "Cannot delete self."
+          },
+          "404": {
+            "description": "User not found."
           }
         },
         "summary": "Delete user",
@@ -102,6 +120,9 @@
         "responses": {
           "200": {
             "description": "Updated custom data in JSON for the given user ID."
+          },
+          "404": {
+            "description": "User not found."
           }
         },
         "summary": "Update user custom data",
@@ -126,6 +147,9 @@
         "responses": {
           "200": {
             "description": "Updated profile in JSON for the given user ID."
+          },
+          "404": {
+            "description": "User not found."
           }
         },
         "summary": "Update user profile",
