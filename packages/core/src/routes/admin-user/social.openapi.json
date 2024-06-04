@@ -39,7 +39,13 @@
     },
     "/api/users/{userId}/identities/{target}": {
       "delete": {
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "target",
+            "in": "path",
+            "description": "The name of the connector. Case-sensitive"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The identity is deleted from the user."

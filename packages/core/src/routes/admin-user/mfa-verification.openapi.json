@@ -17,7 +17,7 @@
               "schema": {
                 "properties": {
                   "type": {
-                    "description": "The type of MFA verification to create. Capital-Sensitive, should be either `Totp` or `BackupCode`"
+                    "description": "The type of MFA verification to create. Case-Sensitive, should be either `Totp` or `BackupCode`"
                   }
                 }
               }
